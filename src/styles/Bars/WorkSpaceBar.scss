@@ -1,0 +1,28 @@
+.WorkSpaceBar {
+    background-color: #8787A1;
+    padding: 10px;
+
+    .WorkSpaceBar__createBtn {
+        &:hover {
+            border-radius: 20px;
+        }
+
+        .WorkSpaceBar__createIcon {
+            font-size: 2rem;
+            color: green;   
+        }
+    }
+}
+
+.WorkSpaceBar__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: whitesmoke;
+}
+
