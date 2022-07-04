@@ -20,12 +20,12 @@ socket.on('welcome', (user) => {
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
   const { content } = prop;
-  // const [beforecontent, setBeforeContent] = useState<any>([]);
-  // useEffect(() => {
-  //   getChatMessage(1).then((res) => {
-  //     res.map((el: any) => setBeforeContent([...beforecontent, el.message]));
-  //   });
-  // }, []);
+  const [beforecontent, setBeforeContent] = useState<any>([]);
+  useEffect(() => {
+    getChatMessage(1).then((res) => {
+      res.map((el: any) => setBeforeContent([...beforecontent, el.message]));
+    });
+  }, []);
 
   return (
     <div className="chat_content">
@@ -42,7 +42,7 @@ function ChatContent(prop: any) {
 function ChatInput() {
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState<string | undefined>('');
-  const [content, setContent] = useState<any>([]);
+  const [content, setContent] = useState<any[]>([]);
   const [nicknames, setNickname] = useState<string>('');
   const [connect, setConnect] = useState<boolean>(false);
 
@@ -84,10 +84,13 @@ function ChatInput() {
   // 아무거나 테스트 버튼 / 채팅 메시지
   async function realTest() {
     getChatMessage(1).then((res) =>
-      res.map((el: any) => console.log(el.message))
+      res.map((el: any) => {
+        console.log(el.message);
+        return setContent([...content, el.message]);
+      })
     );
   }
-
+  // setContent([...content, el.message]);
   return (
     <>
       <button type="button" onClick={roomConnect}>
