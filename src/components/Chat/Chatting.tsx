@@ -20,13 +20,6 @@ socket.on('welcome', (user) => {
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
   const { content } = prop;
-  const [beforecontent, setBeforeContent] = useState<any>([]);
-  useEffect(() => {
-    getChatMessage(1).then((res) => {
-      res.map((el: any) => setBeforeContent([...beforecontent, el.message]));
-    });
-  }, []);
-
   return (
     <div className="chat_content">
       <ul>
@@ -83,14 +76,11 @@ function ChatInput() {
 
   // 아무거나 테스트 버튼 / 채팅 메시지
   async function realTest() {
-    getChatMessage(1).then((res) =>
-      res.map((el: any) => {
-        console.log(el.message);
-        return setContent([...content, el.message]);
-      })
-    );
+    getChatMessage(1).then((res) => {
+      const chatlist = res.map((el: any) => el.message);
+      setContent(chatlist);
+    });
   }
-  // setContent([...content, el.message]);
   return (
     <>
       <button type="button" onClick={roomConnect}>
